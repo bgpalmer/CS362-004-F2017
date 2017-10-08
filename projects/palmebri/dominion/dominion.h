@@ -128,4 +128,17 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 /* Set array position of each player who won (remember ties!) to
    1, others to 0 */
 
+/* My Functions */
+
+/* Returns 0 on success, -1 on error */
+int mine_fn( struct gameState * state, int card, int choice1, int choice2, int choice3, int handPos );
+
+int village_fn( struct gameState * state, int handPos );
+
+int baron_fn( struct gameState * state, int choice1 );
+
+int smithy_fn( struct gameState * state, int handpos );
+
+int adventurer_fn( struct gameState * state );
+
 #endif
