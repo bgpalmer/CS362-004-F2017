@@ -167,9 +167,9 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
       state->discardCount[i] = 0;
       //draw 5 cards
       // for (j = 0; j < 5; j++)
-      //	{
-      //	  drawCard(i, state);
-      //	}
+      // 	{
+      // 	  drawCard(i, state);
+      // 	}
     }
   
   //set embargo tokens to 0 for all supply piles
@@ -556,7 +556,7 @@ int drawCard(int player, struct gameState *state)
     
     deckCounter = state->deckCount[player];//Create a holder for the deck count
 
-    if (deckCounter == 0)
+  if (deckCounter == 0)
       return -1;
 
     state->hand[player][count] = state->deck[player][deckCounter - 1];//Add card to hand
@@ -666,15 +666,15 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   //uses switch to select card and perform actions
   switch( card ) 
     {
-    // case adventurer:
-    //   return adventurer_fn( state );
+    case adventurer:
+      return adventurer_fn( state );
 			
     case council_room:
       //+4 Cards
       for (i = 0; i < 4; i++)
-	{
-	  drawCard(currentPlayer, state);
-	}
+    	{
+    	  drawCard(currentPlayer, state);
+    	}
 			
       //+1 Buy
       state->numBuys++;
@@ -739,8 +739,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
       //Reset Hand
       for (i = 0; i <= state->handCount[currentPlayer]; i++){
-	state->hand[currentPlayer][i] = temphand[i];
-	temphand[i] = -1;
+        state->hand[currentPlayer][i] = temphand[i];
+        temphand[i] = -1;
       }
       //Reset Hand
       			
@@ -1269,7 +1269,7 @@ int village_fn( struct gameState * state, int handPos ) {
 int baron_fn( struct gameState * state, int choice1 ) {
   int currentPlayer = whoseTurn(state);
   state->numBuys++;//Increase buys by 1!
-  if (choice1 > 0) {//Boolean true or going to discard an estate
+  if (choice1 < 0) {//Boolean true or going to discard an estate
     int p = 0;//Iterator for hand!
     int card_not_discarded = 1;//Flag for discard set!
     while(card_not_discarded){
@@ -1313,14 +1313,15 @@ int baron_fn( struct gameState * state, int choice1 ) {
 }
 
 int smithy_fn( struct gameState * state, int handPos ) {
-  int currentPlayer = whoseTurn(state);
+  int currentPlayer = whoseTurn( state );
   //+3 Cards
-  for (int i = 0; i < 6; i++)
+  int i;
+  for ( i = 0; i < 6; i++)
   {
-    drawCard(currentPlayer, state);
+    drawCard( currentPlayer, state );
   }
   //discard card from hand
-  discardCard(handPos, currentPlayer, state, 0);
+  discardCard( handPos, currentPlayer, state, 0 );
   return 0;
 }
 
@@ -1331,7 +1332,7 @@ int adventurer_fn( struct gameState * state ){
   int z = 0; /* Temp hand counter */
 
   while( drawntreasure < 2 ) {
-    if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
+    if (state->deckCount[currentPlayer] < 1){//if the deck is empty we need to shuffle discard and add to deck
       shuffle(currentPlayer, state);
     }
     drawCard(currentPlayer, state);
