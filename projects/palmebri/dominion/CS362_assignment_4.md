@@ -16,7 +16,7 @@ As a result of random testing, we were able to uncover faults that could not be 
 
 #### Code Coverage
 
-1. Adventurer </br>
+I. Adventurer </br>
 
 <pre><code>
 
@@ -32,7 +32,7 @@ As a result of random testing, we were able to uncover faults that could not be 
 
 Enough randomized inputs were generated to cause the adventure_fn to use all paths. 98% of calls returned because there was eventually a segmentation fault caused by certain inputs. The amount of time before the seg fault was < 1 second. 
 
-2. Smithy </br>
+II. Smithy </br>
 
 <pre><code>
 
@@ -50,7 +50,7 @@ Enough randomized inputs were generated to cause the adventure_fn to use all pat
 
 Enough randomized inputs were generated to execute all lines within smithy, without any faults. Every single test failed, showing differences between the oracle state and test function state in members that we were tracking. 
 
-3. Village </br>
+III. Village </br>
 
 <pre><code>
 
@@ -71,4 +71,4 @@ All lines in Smithy were executed in 2000 tests, and all tests returned.
 
 In terms of coverage, both random and unit tests were able to achieve 100% coverage. I would expect that creating enough inputs to acheive 100% coverage of unit tests becomes increasingly difficult as the function under test grows in complexity, though. Our functions under test were relatively simple in design and complete coverage could be obtained with not many inputs. For larger, more complex functions, the tester could probably acheieve 100% more coverage more easily using random testing. In fact, the tester would probably need to break the complex function down into smaller parts and create unit tests for each.
 
-Random testing was much better at finding faults. For example, the adventurer unit test failed to find the segmentation fault that the random tester found because the inputs provided were not sufficient to trigger the fault. After further analysis, the fault could be acheived if the users deck and discard pile did not have 2 target cards ( coppers, silvers, or golds). The unit tests always had these cards in the players deck. Because of the randomized inputs, 
+Random testing was much better at finding faults. For example, the adventurer unit test failed to find the segmentation fault that the random tester found because the inputs provided were not sufficient to trigger the fault. After further analysis, the fault could be acheived if the users deck and discard pile did not have 2 target cards ( coppers, silvers, or golds). The unit tests always had these cards in the players deck. This case would have been much harder to discover with regular unit testing.
