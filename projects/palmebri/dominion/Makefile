@@ -74,10 +74,46 @@ cardtest4: cardtest4.o dominion.o rngs.o
 cardtest4.o: cardtest4.c
 	gcc -c cardtest4.c -g $(CFLAGS)
 
+randomtestcard1: randomtestcard1.o dominion.o rngs.o
+	gcc -o randomtestcard1 randomtestcard1.o dominion.o rngs.o -g $(CFLAGS)
+
+randomtestcard1.o: randomtestcard1.c
+	gcc -c randomtestcard1.c -g $(CFLAGS)
+
+randomtestcard2: randomtestcard2.o dominion.o rngs.o
+	gcc -o randomtestcard2 randomtestcard2.o dominion.o rngs.o -g $(CFLAGS)
+
+randomtestcard2.o: randomtestcard2.c
+	gcc -c randomtestcard2.c -g $(CFLAGS)
+
+randomtestcard3: randomtestcard3.o dominion.o rngs.o
+	gcc -o randomtestcard3 randomtestcard3.o dominion.o rngs.o -g $(CFLAGS)
+
+randomtestcard3.o: randomtestcard3.c
+	gcc -c randomtestcard3.c -g $(CFLAGS)
+
 runtests: testDrawCard 
 	./testDrawCard &> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
+
+randomtestadventurer.out: randomtestcard1
+	./$^ > $@
+	gcov -b dominion.c >> $@
+	cat dominion.c.gcov >> $@
+	rm -f dominion.gcda
+
+randomtestcard1.out: randomtestcard2
+	./$^ > $@
+	gcov -b dominion.c >> $@
+	cat dominion.c.gcov >> $@
+	rm -f dominion.gcda
+
+randomtestcard2.out: randomtestcard3
+	./$^ > $@
+	gcov -b dominion.c >> $@
+	cat dominion.c.gcov >> $@
+	rm -f dominion.gcda
 
 unittestresults.out: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
 	./unittest1 > ${file}
