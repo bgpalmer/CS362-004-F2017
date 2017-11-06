@@ -35,7 +35,7 @@ int main( void ) {
 				result &= c &= ( state.hand[ state.whoseTurn ][ pos ] == handCard( pos, &state ));
 				if ( ! c ) printf( "ERROR: players_hand_copy[ player ][ hand ]: %d\n", players_hand_copy[ player ][ hand ] );
 			}
-			if ( ( ++state.whoseTurn ) >= players ) state.whoseTurn = 0;
+			if (( ++state.whoseTurn ) >= players ) state.whoseTurn = 0;
 		}
 	}
 	( result ) ? printf( "SUCCESS\n" ) : printf( "FAILURE\n") ;

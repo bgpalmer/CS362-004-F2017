@@ -536,13 +536,12 @@ int drawCard(int player, struct gameState *state)
     }
 
     state->deckCount[player] = state->discardCount[player];
-    state->discardCount[player] = 0;//Reset discard
-
+    state->discardCount[player] = 0; //Reset discard
     //Shufffle the deck
     shuffle(player, state);//Shuffle the deck up and make it so that we can draw
    
     if (DEBUG){//Debug statements
-      printf("Deck count now: %d\n", state->deckCount[player]);
+      printf("Deck count now: %d\n", state->deckCount[player]); fflush( stdout );
     }
     
     state->discardCount[player] = 0;
@@ -553,12 +552,10 @@ int drawCard(int player, struct gameState *state)
     if (DEBUG){//Debug statements
       printf("Current hand count: %d\n", count);
     }
-    
     deckCounter = state->deckCount[player];//Create a holder for the deck count
-
-  if (deckCounter == 0)
+  if (deckCounter == 0) {
       return -1;
-
+    }
     state->hand[player][count] = state->deck[player][deckCounter - 1];//Add card to hand
     state->deckCount[player]--;
     state->handCount[player]++;//Increment hand count
@@ -575,6 +572,7 @@ int drawCard(int player, struct gameState *state)
     state->hand[player][count] = state->deck[player][deckCounter - 1];//Add card to the hand
     state->deckCount[player]--;
     state->handCount[player]++;//Increment hand count
+
   }
 
   return 0;
@@ -662,7 +660,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     nextPlayer = 0;
   }
   
-	
   //uses switch to select card and perform actions
   switch( card ) 
     {
@@ -1256,7 +1253,7 @@ int village_fn( struct gameState * state, int handPos ) {
   int currentPlayer = whoseTurn(state);
     //+1 Card
     drawCard(currentPlayer, state);
-      
+
     //+2 Actions
     state->numActions = state->numActions + 5;
       
@@ -1337,9 +1334,9 @@ int adventurer_fn( struct gameState * state ){
     }
     drawCard(currentPlayer, state);
     int cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-    if ((cardDrawn == copper && cardDrawn == silver ) || cardDrawn == gold)
+    if ((cardDrawn == copper && cardDrawn == silver ) || cardDrawn == gold) {
       drawntreasure++;
-    else{
+    } else{
       temphand[z]=cardDrawn;
       state->handCount[currentPlayer]++; //this should just remove the top card (the most recently drawn one).
       z++;
