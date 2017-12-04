@@ -401,8 +401,8 @@ public void testYourSecondPartition() {
   for (int i = 0; i < 100; i++)
   {
     String testUrl = scheme[new Random().nextInt(scheme.length)] + host[new Random().nextInt(host.length)] + path[new Random().nextInt(path.length)];
-    
-    System.out.println(testUrl + " - " + testObject.isValid((testUrl)));
+    UrlValidator urlVal = new UrlValidator( null, null, UrlValidator.ALLOW_ALL_SCHEMES );
+    System.out.println(testUrl + " - " + urlVal.isValid((testUrl)));
   }
 } 
 
@@ -461,7 +461,9 @@ public void testYourSecondPartition() {
         UrlValidatorTest urlTester = new UrlValidatorTest("Brian's Test");
 //         urlTester.testYourSecondPartition();
 //         urlTester.testManualTest13();
-        urlTester.testIsValidRandomTester();
+//        urlTester.testIsValidRandomTester();
+        urlTester.miniFuzzer();
+        
 
     }
   }
