@@ -39,13 +39,84 @@ public class UrlValidatorTest extends TestCase {
 
    
    
-   public void testManualTest()
-   {
-     UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
-     System.out.println(urlVal.isValid("localhost"));
-   }
+public void testManualTest1()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid( null )); // false
+}
    
+public void testManualTest2()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("https://github.com")); // true
+}
+  
+public void testManualTest3()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("www.google.com")); // false
+}
    
+public void testManualTest4()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("fal://facebook.com")); // true
+}
+
+public void testManualTest5()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("https://twitch.com")); // true
+}
+
+public void testManualTest6()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("https:://netflix.org/80")); // false
+}
+
+public void testManualTest7()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("abc/80")); // false
+}
+
+public void testManualTest8()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("127.0.1.0")); // false
+}
+
+public void testManualTest9()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("127.0.1.0:google")); // false
+}
+
+public void testManualTest10()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("9000:127.0.1.0")); // false
+}
+
+public void testManualTest11()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("www.amazo1n.com")); // false
+}
+
+public void testManualTest12()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("https://www.amazo1n.com")); // true
+}
+
+public void testManualTest13()
+{
+  UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);       
+  System.out.println(urlVal.isValid("https://www.amazon.com:8000")); // false
+}
+
 public void testYourFirstPartition() {
     
   System.out.println("\n==========Testing Schemes:=====================================\n");
@@ -338,10 +409,10 @@ public void testYourSecondPartition() {
    
    // private static final String SCHEME_REGEX = "^\\p{Alnum}[\\p{Alnum}\\+\\.\\-])*(:\/\/)$";
    // private static final String AUTHORITY_REGEX = "((*:*@$)"
-  public void testIsValid()
+  public void testIsValidRandomTester()
   {
     String scheme[] = { "https://", "http://", "ftp://", "mailto://", "file://", "data://", "irc://" };
-    String authority[] = { "www.google.com", "localhost:8080", "127.0.0.1", "aunt.localnet", "nytimes.com", "go.cc:65636" };
+    String authority[] = { "www.google.com", "localhost:8080", "127.0.0.1", "aunt.localnet", "nytimes.com", "go.cc:65636", "www.amazon.com:8000" };
     String path[] = { "/path", "" };
     String query[] = { "/?query=test", "" };
 
@@ -388,9 +459,9 @@ public void testYourSecondPartition() {
     */
     public static void main( String[ ] argv ) {
         UrlValidatorTest urlTester = new UrlValidatorTest("Brian's Test");
-        // urlTester.testYourSecondPartition();
-        // urlTester.testManualTest();
-        urlTester.testIsValid();
+//         urlTester.testYourSecondPartition();
+//         urlTester.testManualTest13();
+        urlTester.testIsValidRandomTester();
 
     }
   }
